@@ -25,7 +25,20 @@ const Layout = () => {
         </div>
         <div className="flex-1">
           <div className="flex justify-center w-full">
-            {!id && <input type="text" placeholder="search" />}
+            {!id && (
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder=""
+                  className="w-60 h-8 rounded-lg p-4 pl-8 border-[3px] border-rigi-500"
+                />
+                <img
+                  src={"/search_icon.png"}
+                  alt="Search Icon"
+                  className="absolute top-1/2 transform -translate-y-1/2 left-2 w-5 h-5 object-contain"
+                />
+              </div>
+            )}
           </div>
         </div>
         <ThemeSwitcher />
@@ -38,7 +51,7 @@ const Layout = () => {
           </div>
         </div>
       )}
-      <main className="flex-1 ">
+      <main className="flex-1 mx-auto px-36">
         <Outlet />
       </main>
     </div>
