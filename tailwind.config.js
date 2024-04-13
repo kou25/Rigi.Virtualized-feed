@@ -11,7 +11,8 @@ export default {
         "rigi-300": "#10172A",
         "rigi-400": "#172038",
         "rigi-500": "#DAE4ED",
-        "rigi-600": "#BFD4E4"
+        "rigi-600": "#BFD4E4",
+        "rigi-700": "#DDEAF3"
       }
     }
   },

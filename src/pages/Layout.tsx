@@ -3,13 +3,14 @@ import { FaBars } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
 import { Outlet, useParams } from "react-router-dom";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
+import { SearchBar } from "../components/SearchBar";
 
 const Layout = () => {
   const { id } = useParams();
   const [expand, setExpand] = useState(false);
 
   return (
-    <div className="relative bg-rigi-50 dark:bg-rigi-400 dark:text-white min-h-screen">
+    <div className="relative bg-rigi-50 dark:bg-rigi-400 dark:text-white ">
       <nav className="flex items-center justify-between bg-rigi-100 dark:bg-rigi-300 px-4 py-2 lg:px-8 min-h-20 h-auto">
         <div className="lg:hidden">
           <button
@@ -25,20 +26,7 @@ const Layout = () => {
         </div>
         <div className="flex-1">
           <div className="flex justify-center w-full">
-            {!id && (
-              <div className="relative">
-                <input
-                  type="text"
-                  placeholder=""
-                  className="w-60 h-8 rounded-lg p-4 pl-8 border-[3px] border-rigi-500"
-                />
-                <img
-                  src={"/search_icon.png"}
-                  alt="Search Icon"
-                  className="absolute top-1/2 transform -translate-y-1/2 left-2 w-5 h-5 object-contain"
-                />
-              </div>
-            )}
+            {!id && <SearchBar />}
           </div>
         </div>
         <ThemeSwitcher />
@@ -51,7 +39,7 @@ const Layout = () => {
           </div>
         </div>
       )}
-      <main className="flex-1 mx-auto px-36">
+      <main className="flex-1 mx-auto  lg:px-36 min-h-screen">
         <Outlet />
       </main>
     </div>
