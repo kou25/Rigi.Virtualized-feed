@@ -1,14 +1,16 @@
 import { useState } from "react";
 import { FaBars } from "react-icons/fa";
-import { IoIosClose, IoIosSunny } from "react-icons/io";
+import { IoIosClose } from "react-icons/io";
 import { Outlet, useParams } from "react-router-dom";
+import { ThemeSwitcher } from "../components/ThemeSwitcher";
 
 const Layout = () => {
   const { id } = useParams();
   const [expand, setExpand] = useState(false);
+
   return (
-    <div className="relative">
-      <nav className="flex items-center justify-between bg-stone-200 px-4 py-2 lg:px-8 min-h-20 h-auto">
+    <div className="relative bg-rigi-50 dark:bg-rigi-400 dark:text-white min-h-screen">
+      <nav className="flex items-center justify-between bg-rigi-100 dark:bg-rigi-300 px-4 py-2 lg:px-8 min-h-20 h-auto">
         <div className="lg:hidden">
           <button
             className="text-mcs-800 focus:outline-none"
@@ -26,9 +28,7 @@ const Layout = () => {
             {!id && <input type="text" placeholder="search" />}
           </div>
         </div>
-        <div>
-          <IoIosSunny className="text-2xl text-blue-400" />
-        </div>
+        <ThemeSwitcher />
       </nav>
       {expand && (
         <div className="absolute top-0 left-0 w-full h-full bg-stone-200 lg:hidden">
@@ -38,7 +38,7 @@ const Layout = () => {
           </div>
         </div>
       )}
-      <main className="flex-1">
+      <main className="flex-1 ">
         <Outlet />
       </main>
     </div>
