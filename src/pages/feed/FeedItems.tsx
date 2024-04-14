@@ -93,6 +93,8 @@ export const FeedItems = ({
     <div
       className="col-span-1 lg:col-span-2  border-x-2 border-[#DAE4ED] dark:border-rigi-300 p-4"
       id="feeds"
+      tabIndex={0}
+      aria-label="Feed items"
     >
       {/* Render loaders or posts based on status */}
       {status === "pending" ? (
@@ -108,6 +110,7 @@ export const FeedItems = ({
             width: `100%`,
             overflow: "auto"
           }}
+          tabIndex={0}
         >
           <div
             style={{
@@ -137,6 +140,7 @@ export const FeedItems = ({
                         height: "auto",
                         transform: `translateY(${virtualRow.start}px)`
                       }}
+                      tabIndex={0}
                     >
                       {isLoaderRow ? (
                         hasMore ? (
