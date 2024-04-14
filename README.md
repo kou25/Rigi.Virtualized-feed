@@ -29,6 +29,7 @@ npm i
 5. Add the following environment variables to the `.local.env` file:
 
 VITE_API_URL="https://rigi-react-assignment-ii-server-production.up.railway.app/api"
+
 VITE_API_KEY=[Add your API key here]
 
 6. Save the `.local.env` file.
