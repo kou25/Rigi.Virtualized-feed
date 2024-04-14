@@ -41,6 +41,8 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
                   playsInline
                   autoPlay
                   muted
+                  tabIndex={0}
+                  aria-label="Video attachment"
                   preload="metadata"
                   poster="/video-icon.png"
                 >
@@ -88,6 +90,8 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
             playsInline
             autoPlay
             muted
+            tabIndex={0}
+            aria-label="Video attachment"
             preload="metadata"
             poster="/video-icon.png"
           >
@@ -105,6 +109,9 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
         to={`/feed/${post.id}`}
         key={post.id}
         className="flex items-start mt-4 border-b-2 pb-4 cursor-pointer"
+        role="link"
+        tabIndex={0}
+        aria-label="View post details"
       >
         <img
           src={post?.author?.profilePictureUrl}

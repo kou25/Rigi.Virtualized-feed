@@ -22,9 +22,24 @@ export const ThemeSwitcher = () => {
     setDarkMode((prevMode) => !prevMode); // Invert the current darkMode state
   };
 
+  // Function to handle keyboard events for accessibility
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    // Toggle dark mode when Enter key is pressed
+    if (event.key === "Enter") {
+      toggleDarkMode();
+    }
+  };
+
   return (
     // Container for the theme switcher icon
-    <div onClick={toggleDarkMode} className="cursor-pointer">
+    <div
+      onClick={toggleDarkMode}
+      onKeyDown={handleKeyDown}
+      role="button"
+      tabIndex={0}
+      className="cursor-pointer"
+      aria-label={darkMode ? "Enable light mode" : "Enable dark mode"}
+    >
       {/* Render sun icon if darkMode is false, otherwise render moon icon */}
       {darkMode ? (
         <IoIosMoon className="text-2xl text-white" />

@@ -13,13 +13,14 @@ type NavItemProps = {
   icon: any;
   onClose?: () => void;
 };
+
 const Layout = () => {
   const { id } = useParams();
   const [expand, setExpand] = useState(false);
   const menuItems = useGetMenuItems();
 
   return (
-    <div className="relative bg-rigi-50 dark:bg-rigi-400 dark:text-white ">
+    <div className="relative bg-rigi-50 dark:bg-rigi-400 dark:text-white">
       {/* Navigation bar */}
       <nav className="flex items-center justify-between bg-rigi-100 dark:bg-rigi-300 px-4 py-2 lg:px-8 min-h-20 h-auto">
         {/* Mobile menu toggle */}
@@ -27,6 +28,7 @@ const Layout = () => {
           <button
             className="text-mcs-800 focus:outline-none"
             onClick={() => setExpand(!expand)}
+            aria-label="Toggle mobile menu"
           >
             <FaBars className="text-mcs-800" />
           </button>
@@ -46,8 +48,13 @@ const Layout = () => {
         <div className="absolute z-50 top-0 left-0 w-full h-full bg-white dark:bg-rigi-400 lg:hidden">
           <div className="p-8 flex justify-between">
             <p className="mb-4 text-base font-medium">Menu</p>
-            <div onClick={() => setExpand(!expand)} className="cursor-pointer">
-              {<IoIosClose className="text-2xl text-red-400" />}
+            <div
+              onClick={() => setExpand(!expand)}
+              className="cursor-pointer"
+              tabIndex={0}
+              aria-label="Close mobile menu"
+            >
+              <IoIosClose className="text-2xl text-red-400" />
             </div>
             {/* Add your menu items here */}
           </div>
@@ -86,8 +93,11 @@ function NavItem({ label, to, icon, onClose }: NavItemProps) {
         )
       }
       onClick={onClose}
+      aria-current="page"
     >
-      <span className="flex justify-center items-center">{icon}</span>
+      <span className="flex justify-center items-center" aria-hidden="true">
+        {icon}
+      </span>
       <span className="inline-block ml-2">{label}</span>
     </NavLink>
   );
@@ -98,13 +108,13 @@ function useGetMenuItems() {
     {
       label: "Feed",
       to: "/",
-      icon: <MdOutlineFeed className="w-6 " />
+      icon: <MdOutlineFeed className="w-6" aria-label="Feed" />
     },
 
     {
       label: "Members",
       to: "/members",
-      icon: <FaUsers className="w-6 " />
+      icon: <FaUsers className="w-6" aria-label="Members" />
     }
   ];
 
