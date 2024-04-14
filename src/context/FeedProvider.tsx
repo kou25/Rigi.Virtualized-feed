@@ -1,12 +1,6 @@
 /* eslint-disable react-refresh/only-export-components */
 
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useState
-} from "react";
+import { createContext, useContext, useEffect, useMemo, useState } from "react";
 import { PostResnponse } from "../pages/feed/hooks/types";
 import useGetFeeds from "../pages/feed/hooks/useGetFeeds";
 import { Outlet } from "react-router-dom";
@@ -17,10 +11,11 @@ interface FeedContextShape {
   fetchNextPage: () => void;
   total: number;
   hasMore: boolean;
-  handleSearch: (value: string) => void;
+  updateSearch: (value: string) => void;
   status: string;
   error: Error | null;
   isFetchingNextPage: boolean;
+  search: string;
 }
 
 const initialState: FeedContextShape = {
@@ -29,10 +24,11 @@ const initialState: FeedContextShape = {
   fetchNextPage: () => {},
   total: 0,
   hasMore: false,
-  handleSearch: () => {},
+  updateSearch: () => {},
   status: "pending",
   error: null,
-  isFetchingNextPage: false
+  isFetchingNextPage: false,
+  search: ""
 };
 
 const FeedContext = createContext<FeedContextShape>(
@@ -48,16 +44,27 @@ function FeedProvider() {
     isFetching,
     isFetchingNextPage,
     fetchNextPage,
-    hasNextPage
+    hasNextPage,
+    refetch
   } = useGetFeeds(search);
 
   const allRows = useMemo(() => {
-    return data ? (data.pages.flatMap((d) => d.data) as PostResnponse[]) : [];
-  }, [data]);
+    return data && search.length === 0
+      ? (data.pages.flatMap((d) => d.data) as PostResnponse[])
+      : data && search.length !== 0
+      ? (data.pages.flatMap((d) => d) as any[])
+      : [];
+  }, [data, search]);
 
-  const handleSearch = useCallback((value: string) => {
+  const updateSearch = (value: string) => {
     setSearch(value);
-  }, []);
+  };
+
+  useEffect(() => {
+    if (search.length > 0) {
+      refetch();
+    }
+  }, [search]);
 
   const value = useMemo(
     () => ({
@@ -66,20 +73,22 @@ function FeedProvider() {
       fetchNextPage,
       total: 0,
       hasMore: hasNextPage,
-      handleSearch,
+      updateSearch,
       status,
       error,
-      isFetchingNextPage
+      isFetchingNextPage,
+      search
     }),
     [
+      updateSearch,
       isFetching,
       isFetchingNextPage,
       fetchNextPage,
       hasNextPage,
       allRows,
-      handleSearch,
       status,
-      error
+      error,
+      search
     ]
   );
 

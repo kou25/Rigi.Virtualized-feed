@@ -23,12 +23,12 @@ const queryClient = new QueryClient({
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
-      <Route path="/" element={<Navigate replace to="/feed" />} />
-      <Route path="/feed" element={<Layout />}>
-        <Route element={<FeedProvider />}>
+      <Route element={<FeedProvider />}>
+        <Route path="/" element={<Navigate replace to="/feed" />} />
+        <Route path="/feed" element={<Layout />}>
           <Route element={<Feed />} index />
+          <Route path=":id" element={<Post />} />
         </Route>
-        <Route path=":id" element={<Post />} />
       </Route>
     </>
   )

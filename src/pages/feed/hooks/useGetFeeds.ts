@@ -16,11 +16,11 @@ const getApiFunction = async (pageParam: number, search?: string) => {
 
 export default function useGetFeeds(search?: string) {
   return useInfiniteQuery({
-    queryKey: ["feeds"],
+    queryKey: ["feeds", search],
     queryFn: ({ pageParam = 1 }) => getApiFunction(pageParam, search),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => {
-      const nextPage = lastPage.pagination.hasMore
+      const nextPage = lastPage?.pagination?.hasMore
         ? pages.length + 1
         : undefined;
       return nextPage;
