@@ -10,6 +10,7 @@ import Layout from "./pages/Layout";
 import Feed from "./pages/feed/Feed";
 import Post from "./pages/post/Post";
 import { FeedProvider } from "./context/FeedProvider";
+import { MobileMemebers } from "./pages/members/MobileMemebers";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,6 +29,9 @@ const router = createBrowserRouter(
         <Route path="/feed" element={<Layout />}>
           <Route element={<Feed />} index />
           <Route path=":id" element={<Post />} />
+        </Route>
+        <Route path="/members" element={<Layout />}>
+          <Route element={<MobileMemebers />} index />
         </Route>
       </Route>
     </>

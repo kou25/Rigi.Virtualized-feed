@@ -1,12 +1,14 @@
 import { AvartarSkeleton } from "../../components/AvartarSkeleton";
 import useGetMembers from "./hooks/useGetMembers";
 
-export const Memebers = () => {
+export const Memebers = ({ isMobile = false }: { isMobile?: boolean }) => {
   // Fetch member data
   const { data = [], isLoading } = useGetMembers();
 
   return (
-    <div className="hidden lg:flex justify-center py-4">
+    <div
+      className={`${isMobile ? "flex" : "hidden"} lg:flex justify-center py-4`}
+    >
       <div>
         {/* Header */}
         <p className="text-base text-slate-400 font-medium">Members</p>

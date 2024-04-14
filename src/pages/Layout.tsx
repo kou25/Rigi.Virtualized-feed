@@ -1,13 +1,22 @@
 import { useState } from "react";
-import { FaBars } from "react-icons/fa";
+import { FaBars, FaUsers } from "react-icons/fa";
 import { IoIosClose } from "react-icons/io";
-import { Outlet, useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { ThemeSwitcher } from "../components/ThemeSwitcher";
 import { SearchBar } from "../components/SearchBar";
+import cn from "classnames";
+import { MdOutlineFeed } from "react-icons/md";
 
+type NavItemProps = {
+  label: string;
+  to: string;
+  icon: any;
+  onClose?: () => void;
+};
 const Layout = () => {
   const { id } = useParams();
   const [expand, setExpand] = useState(false);
+  const menuItems = useGetMenuItems();
 
   return (
     <div className="relative bg-rigi-50 dark:bg-rigi-400 dark:text-white ">
@@ -19,11 +28,7 @@ const Layout = () => {
             className="text-mcs-800 focus:outline-none"
             onClick={() => setExpand(!expand)}
           >
-            {expand ? (
-              <IoIosClose className="text-2xl text-red-400" />
-            ) : (
-              <FaBars className="text-mcs-800" />
-            )}
+            <FaBars className="text-mcs-800" />
           </button>
         </div>
         {/* Search bar */}
@@ -38,11 +43,25 @@ const Layout = () => {
       </nav>
       {/* Mobile menu */}
       {expand && (
-        <div className="absolute top-0 left-0 w-full h-full bg-stone-200 lg:hidden">
-          <div className="p-8">
+        <div className="absolute z-50 top-0 left-0 w-full h-full bg-white dark:bg-rigi-400 lg:hidden">
+          <div className="p-8 flex justify-between">
             <p className="mb-4 text-base font-medium">Menu</p>
+            <div onClick={() => setExpand(!expand)} className="cursor-pointer">
+              {<IoIosClose className="text-2xl text-red-400" />}
+            </div>
             {/* Add your menu items here */}
           </div>
+          <nav className="flex-1 px-0 space-y-1 overflow-auto bg-white dark:bg-rigi-400">
+            {menuItems.map((item) => (
+              <NavItem
+                key={item.to}
+                label={item.label}
+                to={item.to}
+                icon={item.icon}
+                onClose={() => setExpand(false)}
+              />
+            ))}
+          </nav>
         </div>
       )}
       {/* Main content */}
@@ -53,5 +72,43 @@ const Layout = () => {
     </div>
   );
 };
+
+function NavItem({ label, to, icon, onClose }: NavItemProps) {
+  return (
+    <NavLink
+      to={to}
+      className={({ isActive }) =>
+        cn(
+          isActive
+            ? "bg-gray-100 dark:bg-rigi-300 text-mcs-900 border-l-4 border-mcs-900"
+            : "text-gray-400 hover:bg-gray-50 hover:text-gray-900",
+          "group flex items-center px-2 py-2 text-sm font-medium rounded-md"
+        )
+      }
+      onClick={onClose}
+    >
+      <span className="flex justify-center items-center">{icon}</span>
+      <span className="inline-block ml-2">{label}</span>
+    </NavLink>
+  );
+}
+
+function useGetMenuItems() {
+  const navItems: NavItemProps[] = [
+    {
+      label: "Feed",
+      to: "/",
+      icon: <MdOutlineFeed className="w-6 " />
+    },
+
+    {
+      label: "Members",
+      to: "/members",
+      icon: <FaUsers className="w-6 " />
+    }
+  ];
+
+  return navItems;
+}
 
 export default Layout;
