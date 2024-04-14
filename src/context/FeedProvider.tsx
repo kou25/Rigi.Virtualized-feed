@@ -5,6 +5,7 @@ import { PostResnponse } from "../pages/feed/hooks/types";
 import useGetFeeds from "../pages/feed/hooks/useGetFeeds";
 import { Outlet } from "react-router-dom";
 
+// Define the shape of the context data
 interface FeedContextShape {
   posts: PostResnponse[];
   isLoading: boolean;
@@ -18,6 +19,7 @@ interface FeedContextShape {
   search: string;
 }
 
+// Initial state of the context
 const initialState: FeedContextShape = {
   posts: [] as PostResnponse[],
   isLoading: true,
@@ -31,12 +33,17 @@ const initialState: FeedContextShape = {
   search: ""
 };
 
+// Create the context
 const FeedContext = createContext<FeedContextShape>(
   initialState as FeedContextShape
 );
 
+// Provider component for the feed context
 function FeedProvider() {
+  // State for search query
   const [search, setSearch] = useState("");
+
+  // Fetch feed data hook
   const {
     status,
     data,
@@ -48,6 +55,7 @@ function FeedProvider() {
     refetch
   } = useGetFeeds(search);
 
+  // Memoized computed value for all rows
   const allRows = useMemo(() => {
     return data && search.length === 0
       ? (data.pages.flatMap((d) => d.data) as PostResnponse[])
@@ -56,16 +64,19 @@ function FeedProvider() {
       : [];
   }, [data, search]);
 
+  // Function to update search query
   const updateSearch = (value: string) => {
     setSearch(value);
   };
 
+  // Refetch data when search query changes
   useEffect(() => {
     if (search.length > 0) {
       refetch();
     }
   }, [search]);
 
+  // Memoized context value
   const value = useMemo(
     () => ({
       posts: allRows,
@@ -92,6 +103,7 @@ function FeedProvider() {
     ]
   );
 
+  // Provide the context value to descendants
   return (
     <FeedContext.Provider value={value}>
       <Outlet />
@@ -99,9 +111,11 @@ function FeedProvider() {
   );
 }
 
+// Export the provider and custom hook
 export { FeedProvider };
 
 export default function useFeed() {
+  // Custom hook to consume the feed context
   const context = useContext(FeedContext);
   if (!context) {
     throw new Error(`useFeed must be used within a FeedProvider`);

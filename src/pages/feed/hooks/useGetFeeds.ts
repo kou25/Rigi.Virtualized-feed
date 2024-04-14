@@ -20,6 +20,7 @@ export default function useGetFeeds(search?: string) {
     queryFn: ({ pageParam = 1 }) => getApiFunction(pageParam, search),
     initialPageParam: 1,
     getNextPageParam: (lastPage, pages) => {
+      // Function to determine the next page parameter
       const nextPage = lastPage?.pagination?.hasMore
         ? pages.length + 1
         : undefined;

@@ -3,7 +3,9 @@ import { PostResnponse } from "./hooks/types";
 import { Link } from "react-router-dom";
 
 export const FeedItem = ({ post }: { post: PostResnponse }) => {
+  // Function to render attachments
   const renderAttachments = () => {
+    // If no attachments, render a message
     if (post.attachments.length === 0)
       return (
         <div className="flex flex-col items-center justify-center w-full">
@@ -22,10 +24,12 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
     const videos = post.attachments.filter((item) => item.type === "video");
     const images = post.attachments.filter((item) => item.type === "image");
 
+    // If there are more than 2 attachments, display in a grid
     if (videos.length + images.length > 2) {
       return (
         <div className="grid grid-cols-2 gap-2 w-full">
           <div>
+            {/* Render videos */}
             {videos.map((item) => (
               <div key={item.id} className="block">
                 <video
@@ -46,6 +50,7 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
             ))}
           </div>
           <div>
+            {/* Render images */}
             {images.map((item, i) => (
               <div key={item.id} className="">
                 <img
@@ -65,6 +70,7 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
         </div>
       );
     } else {
+      // If less than or equal to 2 attachments, render them individually
       return post.attachments.map((item) =>
         item.type === "image" ? (
           <img
@@ -92,6 +98,7 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
     }
   };
 
+  // Render the feed item
   return (
     post !== undefined && (
       <Link
@@ -113,13 +120,16 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
           </div>
           <div className="mb-2">
             <p className="text-xs font-light text-gray-500 dark:text-rigi-700">
+              {/* Format the post creation date */}
               {moment(post.createdAt).fromNow()}
             </p>
           </div>
           <div className="mb-2">
+            {/* Render the post text */}
             <p className="text-base">{post.text}</p>
           </div>
           <div className="flex items-center justify-start w-full h-[227px] rounded-xl">
+            {/* Render attachments */}
             {post && renderAttachments()}
           </div>
         </div>
