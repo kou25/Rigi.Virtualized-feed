@@ -3,7 +3,6 @@ import useGetMembers from "./hooks/useGetMembers";
 
 export const Memebers = () => {
   const { data = [], isLoading } = useGetMembers();
-  console.log(data, "--");
   return (
     <div className="hidden lg:flex justify-center py-4">
       <div>
