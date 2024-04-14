@@ -39,7 +39,7 @@ const Layout = () => {
           </div>
         </div>
       )}
-      <main className="flex-1 mx-auto  lg:px-36 min-h-screen">
+      <main className="flex-1 flex flex-col p-4 container mx-auto min-h-screen">
         <Outlet />
       </main>
     </div>

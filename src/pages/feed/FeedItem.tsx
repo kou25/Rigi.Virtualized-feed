@@ -1,5 +1,6 @@
 import moment from "moment";
 import { PostResnponse } from "./hooks/types";
+import { Link } from "react-router-dom";
 
 export const FeedItem = ({ post }: { post: PostResnponse }) => {
   const renderAttachments = () => {
@@ -93,7 +94,11 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
 
   return (
     post !== undefined && (
-      <div key={post.id} className="flex items-start mt-4 border-b-2 pb-4">
+      <Link
+        to={`/feed/${post.id}`}
+        key={post.id}
+        className="flex items-start mt-4 border-b-2 pb-4 cursor-pointer"
+      >
         <img
           src={post?.author?.profilePictureUrl}
           alt={post?.author?.name}
@@ -102,7 +107,7 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
         />
         <div className="flex-1">
           <div className="my-1">
-            <p className="text-sm font-medium text-gray-900 dark:text-rigi-600">
+            <p className="text-sm font-medium text-gray-900 dark:text-rigi-600 hover:underline">
               {post.author.name}
             </p>
           </div>
@@ -118,7 +123,7 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
             {post && renderAttachments()}
           </div>
         </div>
-      </div>
+      </Link>
     )
   );
 };
