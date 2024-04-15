@@ -14,7 +14,7 @@ export const PostDetailItem = ({ post }: { post: PostResnponse }) => {
       <div className="flex-1">
         {/* Author's name */}
         <div className="my-1">
-          <p className="text-sm font-medium text-gray-900 dark:text-rigi-600 ">
+          <p className="text-xs md:text-sm font-medium text-gray-900 dark:text-rigi-600 ">
             {post.author.name}
           </p>
         </div>
@@ -26,7 +26,7 @@ export const PostDetailItem = ({ post }: { post: PostResnponse }) => {
         </div>
         {/* Post text */}
         <div className="mb-2">
-          <p className="text-base">{post.text}</p>
+          <p className="text-xs md:text-base">{post.text}</p>
         </div>
         <div className="flex flex-col items-center justify-between w-full h-full rounded-xl">
           {/* Render attachments */}

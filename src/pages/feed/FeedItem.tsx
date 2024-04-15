@@ -121,7 +121,7 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
         />
         <div className="flex-1">
           <div className="my-1">
-            <p className="text-sm font-medium text-gray-900 dark:text-rigi-600 hover:underline">
+            <p className="text-xs md:text-sm font-medium text-gray-900 dark:text-rigi-600 hover:underline">
               {post.author.name}
             </p>
           </div>
@@ -133,7 +133,7 @@ export const FeedItem = ({ post }: { post: PostResnponse }) => {
           </div>
           <div className="mb-2">
             {/* Render the post text */}
-            <p className="text-base">{post.text}</p>
+            <p className="text-xs md:text-base">{post.text}</p>
           </div>
           <div className="flex items-center justify-start w-full h-[227px] rounded-xl">
             {/* Render attachments */}
