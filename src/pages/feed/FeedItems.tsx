@@ -31,7 +31,7 @@ export const FeedItems = ({
     count: hasMore ? posts.length + 1 : posts.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 350,
-    overscan: 20
+    overscan: 10
   });
 
   // Scroll Position Reset on Refresh
