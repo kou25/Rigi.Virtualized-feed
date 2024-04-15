@@ -41,3 +41,11 @@ To start the project, run the following command in your terminal:
 ```bash
 npm run dev
 ```
+
+## Test
+
+To run tests in the project, run the following command in your terminal:
+
+```bash
+npm run test
+```
