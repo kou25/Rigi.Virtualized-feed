@@ -10,7 +10,7 @@ describe("SearchBar", () => {
 
   it("updates the search input value", () => {
     render(<SearchBar />);
-    const searchInput = screen.getByLabelText("Search");
+    const searchInput = screen.getByLabelText("Search") as HTMLInputElement;
 
     fireEvent.change(searchInput, { target: { value: "test" } });
 
