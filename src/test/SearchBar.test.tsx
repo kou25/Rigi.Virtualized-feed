@@ -16,16 +16,4 @@ describe("SearchBar", () => {
 
     expect(searchInput.value).toBe("test");
   });
-
-  //   const updateSearch = jest.fn();
-  //   (useFeed as jest.Mock).mockReturnValue({ updateSearch });
-
-  //   render(<SearchBar />);
-  //   const searchInput = screen.getByLabelText("Search");
-
-  //   fireEvent.keyDown(searchInput, { key: "Enter" });
-
-  //   expect(updateSearch).toHaveBeenCalledTimes(1);
-  //   expect(updateSearch).toHaveBeenCalledWith("");
-  // });
 });
