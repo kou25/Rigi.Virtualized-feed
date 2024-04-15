@@ -18,7 +18,10 @@ const Post = () => {
   }, []);
 
   return (
-    <div className="flex justify-center  min-h-screen h-full">
+    <div
+      className="flex justify-center  min-h-screen h-full"
+      data-testid={`post-detail`}
+    >
       {isLoading ? (
         // Render skeleton loader while data is loading
         <div className="w-full lg:w-[40vw]">

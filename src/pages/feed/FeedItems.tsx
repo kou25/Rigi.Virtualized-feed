@@ -95,6 +95,7 @@ export const FeedItems = ({
       id="feeds"
       tabIndex={0}
       aria-label="Feed items"
+      data-testId="feeds"
     >
       {/* Render loaders or posts based on status */}
       {status === "pending" ? (
@@ -174,7 +175,7 @@ const Loaders = () => {
   return (
     <>
       {[1, 2, 3].map((item) => (
-        <div className="mb-8" key={item}>
+        <div className="mb-8" key={item} data-testid="skeleton-loader">
           <PostSkeleton />
         </div>
       ))}

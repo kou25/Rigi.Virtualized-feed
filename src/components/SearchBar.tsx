@@ -30,6 +30,7 @@ export const SearchBar = () => {
       {/* Input field for search with event handlers to update searchInput state and trigger search */}
       <input
         type="text"
+        name="search"
         value={searchInput}
         placeholder=""
         onChange={handleChange}

@@ -33,6 +33,7 @@ export const ThemeSwitcher = () => {
   return (
     // Container for the theme switcher icon
     <div
+      data-testid="theme-switcher"
       onClick={toggleDarkMode}
       onKeyDown={handleKeyDown}
       role="button"
